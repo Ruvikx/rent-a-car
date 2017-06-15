@@ -12,5 +12,5 @@ La línea donde creo el elemento día es la 65 del archivo app.js y "mat" es el 
 
 El funcionamiento es el mismo que el de eliminar coche lo que, en vez de eliminar un sólo coche, elimina todos los coches de ese modelo. La funcionalidad que le tengo que aportar yo es que impida eliminar cualquier coche del modelo seleccionado si hay, al menos, un coche de ese modelo con alguna reserva. Es decir, basta con que haya un solo coche con reserva para impedir que se eliminen el resto de coches(el coche con reserva incluido).
 
-Ahora mismo la funcionalidad de eliminar modelo está eliminando un solo coche(da igual el modelo) cada vez que se llama a esta función. La verdad es que no entiendo el código de la función.(Línea 553 del archivo app.js)
+Ahora mismo la funcionalidad de eliminar modelo está eliminando un solo coche(da igual el modelo) cada vez que se llama a esta función. La verdad es que no entiendo el código de la función.(Línea 553 del archivo app.js) EcmaScript no es mi fuerte xD
 
