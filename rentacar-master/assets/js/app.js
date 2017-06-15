@@ -3,35 +3,99 @@
  */
 var mat = 1;
 
-Calendar = {
-
+class Calendar {
+// Calendar = {
+    constructor(mes, anyo) {
+        this.mes = (isNaN(mes) || mes == null) ? this.fechaActual().getMonth() : mes;
+        this.anyo = (isNaN(anyo) || anyo == null) ? this.fechaActual().getFullYear() : anyo;
+    }
     // Días de la semana
-    dias: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'],
+    // dias: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'],
+    dias = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+
 
     // Meses
-    meses: ['Enero', 'Febrero', 'Marzo', 'Abril',
+    // meses: ['Enero', 'Febrero', 'Marzo', 'Abril',
+    //     'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre',
+    //     'Octrubre', 'Noviembre', 'Diciembre'],
+    meses = ['Enero', 'Febrero', 'Marzo', 'Abril',
         'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre',
-        'Octrubre', 'Noviembre', 'Diciembre'],
+        'Octrubre', 'Noviembre', 'Diciembre'];
 
     // Días que tiene cada mes
-    diasMes: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+    // diasMes: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+    diasMes = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
 
     // Fecha Actual
-    fechaActual: function () {
+    // fechaActual: function () {
+    //     return new Date()
+    // },
+    fechaActual() {
         return new Date()
-    },
+    }
 
     //Constructor
-    Calendario: function (mes, anyo) {
-        return {
-            mes: (isNaN(mes) || mes == null) ? this.fechaActual().getMonth() : mes,
-            anyo: (isNaN(anyo) || anyo == null) ? this.fechaActual().getFullYear() : anyo
-        }
-
-    },
+    // Calendario: function (mes, anyo) {
+    //     return {
+    //         mes: (isNaN(mes) || mes == null) ? this.fechaActual().getMonth() : mes,
+    //         anyo: (isNaN(anyo) || anyo == null) ? this.fechaActual().getFullYear() : anyo
+    //     }
+    //
+    // },
 
     // Función que crea el calendario en html
-    generateHTML: function (settings) {
+    // generateHTML: function (settings) {
+    //
+    //     // Obtengo el primer día del mes
+    //     var primerDia = new Date(settings.anyo, settings.mes, 1);
+    //     var diaInicio = primerDia.getDay();
+    //
+    //     // Indico el número de días que tiene el mes
+    //     var longitudMes = this.diasMes[settings.mes];
+    //
+    //     // Creo la cabezera del calendario(nombre del mes y días de la semana)
+    //     var nombreMes = this.meses[settings.mes]
+    //     var html = '<div id=' + this.meses[settings.mes] + '><table class="tablaCalendario">';
+    //     html += '<tr><th colspan="7">';
+    //     html += nombreMes + "&nbsp;";
+    //     html += '</th></tr>';
+    //     html += '<tr class="headerCalendario">';
+    //     for (var i = 0; i <= 6; i++) {
+    //         html += '<td class="headerDiaCalendario">';
+    //         html += this.dias[i];
+    //         html += '</td>';
+    //     }
+    //     html += '</tr><tr>';
+    //     var numDia = 1;
+    //     var dia = 1;
+    //
+    //     //Inserto los días
+    //     for (var i = 0; i < 9; i++) {
+    //         for (var j = 1; j <= 7; j++) {
+    //             // html += "<td id='calendarioDia" + numDia + "' class='" + meses[this.mes] + "' onclick=pintarDia(calendarioDia" + numDia++ + "," + meses[this.mes] + ")>";
+    //             // html += "<td class=" + Cotxe. + " id='calendarioDia" + numDia + this.meses[settings.mes] + "' onclick=Calendar.pintarDia('calendarioDia" + numDia++ + this.meses[settings.mes] + "')>";
+    //
+    //             html += "<td class='dia' id='calendarioDia" + numDia + this.meses[settings.mes] + mat + "' onclick=Calendar.pintarDia('calendarioDia" + numDia++ + this.meses[settings.mes] + mat++ + "')>";
+    //             if (dia <= longitudMes && (i > 0 || j >= diaInicio)) {
+    //                 html += dia;
+    //                 dia++;
+    //             }
+    //             html += '</td>';
+    //         }
+    //         // Comprueba si quedan más días en el mes
+    //         if (dia > longitudMes) {
+    //             break;
+    //         } else {
+    //             html += '</tr><tr>';
+    //         }
+    //     }
+    //     html += '</tr></table></div>';
+    //
+    //     return html;
+    // },
+
+    generateHTML(settings) {
 
         // Obtengo el primer día del mes
         var primerDia = new Date(settings.anyo, settings.mes, 1);
@@ -61,13 +125,13 @@ Calendar = {
             for (var j = 1; j <= 7; j++) {
                 // html += "<td id='calendarioDia" + numDia + "' class='" + meses[this.mes] + "' onclick=pintarDia(calendarioDia" + numDia++ + "," + meses[this.mes] + ")>";
                 // html += "<td class=" + Cotxe. + " id='calendarioDia" + numDia + this.meses[settings.mes] + "' onclick=Calendar.pintarDia('calendarioDia" + numDia++ + this.meses[settings.mes] + "')>";
-
-                html += "<td class='dia' id='calendarioDia" + numDia + this.meses[settings.mes] + mat + "' onclick=Calendar.pintarDia('calendarioDia" + numDia++ + this.meses[settings.mes] + mat++ + "')>";
+                const td = document.createElement("td"); td.onclick = this.pintarDia("calendarioDia" + numDia++ + this.meses[settings.mes]);
+                // html += "<td class='dia' id='calendarioDia" + numDia + this.meses[settings.mes] + mat + "' onclick=Calendar.pintarDia('calendarioDia" + numDia++ + this.meses[settings.mes] + mat++ + "')>";
                 if (dia <= longitudMes && (i > 0 || j >= diaInicio)) {
                     html += dia;
                     dia++;
                 }
-                html += '</td>';
+                // html += '</td>';
             }
             // Comprueba si quedan más días en el mes
             if (dia > longitudMes) {
@@ -79,10 +143,20 @@ Calendar = {
         html += '</tr></table></div>';
 
         return html;
-    },
+    }
 
 
-    tieneReserva: function (dias) {
+    // tieneReserva: function (dias) {
+    //     var dias = document.getElementsByClassName(dias);
+    //     for (var i = 0; i < dias.length; i++) {
+    //         if (dias[i].style.backgroundColor == 'red') {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // },
+
+    tieneReserva(dias) {
         var dias = document.getElementsByClassName(dias);
         for (var i = 0; i < dias.length; i++) {
             if (dias[i].style.backgroundColor == 'red') {
@@ -90,12 +164,36 @@ Calendar = {
             }
         }
         return false;
-    },
+    }
 
-    clicks: 0,
+    // clicks: 0,
+    clicks = 0;
+
 
     // Función que pinta el día seleccionado dependiendo de si se hace o deshace una reserva
-    pintarDia: function (idDia) {
+    // pintarDia: function (idDia) {
+    //     this.clicks += 1;
+    //     var dia = document.getElementById(idDia);
+    //     dia.style.backgroundColor = "white";
+    //
+    //     if (this.clicks % 2 == 1) {
+    //
+    //         dia.style.backgroundColor = "red";
+    //     }
+    //     else {
+    //         dia.style.backgroundColor = "white";
+    //     }
+    //
+    //     /*var dia = document.getElementById(idDia);
+    //      dia.style.backgroundColor = "white";
+    //      if (dia.style.backgroundColor == "white")
+    //      dia.style.backgroundColor = "red";
+    //      else {
+    //      dia.style.backgroundColor = "white";
+    //      }*/
+    // },
+
+    pintarDia(idDia) {
         this.clicks += 1;
         var dia = document.getElementById(idDia);
         dia.style.backgroundColor = "white";
@@ -115,9 +213,15 @@ Calendar = {
          else {
          dia.style.backgroundColor = "white";
          }*/
-    },
+    }
 
-    getCalendaris: function () {
+    // getCalendaris: function () {
+    //     let marzo = this.generateHTML(this.Calendario(2));
+    //     let abril = this.generateHTML(this.Calendario(3));
+    //     return marzo + abril;
+    // }
+
+    getCalendaris() {
         let marzo = this.generateHTML(this.Calendario(2));
         let abril = this.generateHTML(this.Calendario(3));
         return marzo + abril;
